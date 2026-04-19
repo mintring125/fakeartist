@@ -223,7 +223,9 @@ function revealFakeArtist() {
   showScreen(resultScreen);
 }
 
-generateButton.addEventListener("click", createGame);
+generateButton.addEventListener("click", () => {
+  createGame();
+});
 customToggleButton.addEventListener("click", toggleCustomPanel);
 customGenerateButton.addEventListener("click", createCustomGame);
 secretCard.addEventListener("click", revealRole);
