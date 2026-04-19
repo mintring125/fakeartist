@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>가짜예술가 뉴욕에 가다 문제생성기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="card screen active" id="setup-screen" aria-labelledby="title">
+      <button class="corner-button" id="custom-toggle-button" type="button">커스텀 주제어</button>
+      <p class="eyebrow">Tablet Party Game</p>
+      <h1 id="title">가짜예술가 뉴욕에 가다</h1>
+      <p class="subtitle">인원을 고르면 한 명은 가짜예술가, 나머지는 같은 주제어를 확인합니다.</p>
+
+      <label class="field" for="player-count">사람 수</label>
+      <select id="player-count" class="input">
+        <option value="3">3명</option>
+        <option value="4" selected>4명</option>
+        <option value="5">5명</option>
+        <option value="6">6명</option>
+        <option value="7">7명</option>
+        <option value="8">8명</option>
+      </select>
+
+      <button class="primary-button" id="generate-button">문제 생성하기</button>
+
+      <section class="custom-panel hidden" id="custom-panel" aria-labelledby="custom-title">
+        <h2 id="custom-title">직접 주제어 입력</h2>
+        <p>여기에 입력하면 이번 라운드는 입력한 주제어로 시작합니다.</p>
+        <label class="field" for="custom-keyword">커스텀 주제어</label>
+        <input id="custom-keyword" class="input" type="text" maxlength="30" placeholder="예: 회전초밥">
+        <button class="secondary-button" id="custom-generate-button" type="button">입력한 주제어로 시작</button>
+      </section>
+
+      <section class="keyword-panel" aria-labelledby="keyword-title">
+        <h2 id="keyword-title">주제어 예시</h2>
+        <p>초등학교 3학년 아이들이 재미있게 그릴 수 있는 100개 주제어가 들어 있습니다.</p>
+      </section>
+    </section>
+
+    <section class="card screen" id="reveal-screen" aria-live="polite">
+      <p class="eyebrow" id="round-label">1번째 확인</p>
+      <h2 id="player-label">1번 플레이어</h2>
+      <p class="subtitle" id="instruction-label">아직 다른 사람이 보면 안 돼요. 버튼을 눌러 확인하세요.</p>
+
+      <div class="secret-card" id="secret-card">
+        <p class="secret-placeholder" id="secret-placeholder">탭해서 역할 확인</p>
+        <div class="secret-content hidden" id="secret-content">
+          <p class="secret-role" id="secret-role"></p>
+          <p class="secret-word" id="secret-word"></p>
+        </div>
+      </div>
+
+      <button class="primary-button hidden" id="next-button">다음 사람에게 넘기기</button>
+    </section>
+
+    <section class="card screen" id="timer-screen">
+      <p class="eyebrow">게임 진행</p>
+      <h2 id="turn-status">1 / 8 차례</h2>
+      <p class="subtitle" id="timer-instruction">시간 버튼을 누르면 해당 차례 타이머가 시작됩니다.</p>
+
+      <div class="timer-display" id="timer-display">준비</div>
+
+      <div class="timer-grid">
+        <button class="timer-button" data-seconds="10">10초</button>
+        <button class="timer-button" data-seconds="20">20초</button>
+        <button class="timer-button" data-seconds="30">30초</button>
+        <button class="timer-button" data-seconds="60">1분</button>
+      </div>
+
+      <button class="primary-button hidden" id="reveal-fake-button">가짜 예술가 확인</button>
+    </section>
+
+    <section class="card screen" id="result-screen">
+      <p class="eyebrow">정답 공개</p>
+      <h2 id="fake-result-title">가짜 예술가 공개</h2>
+      <p class="subtitle" id="fake-result-text"></p>
+      <div class="result-box">
+        <p>이번 주제어: <strong id="final-word"></strong></p>
+      </div>
+      <button class="primary-button" id="restart-button">새 문제 만들기</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
