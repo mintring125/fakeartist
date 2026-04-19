@@ -19,6 +19,7 @@ const resultScreen = document.getElementById("result-screen");
 
 const playerCountSelect = document.getElementById("player-count");
 const generateButton = document.getElementById("generate-button");
+const installButton = document.getElementById("install-button");
 const customToggleButton = document.getElementById("custom-toggle-button");
 const customPanel = document.getElementById("custom-panel");
 const customKeywordInput = document.getElementById("custom-keyword");
@@ -40,12 +41,49 @@ const timerButtons = Array.from(document.querySelectorAll(".timer-button"));
 const revealFakeButton = document.getElementById("reveal-fake-button");
 const fakeResultText = document.getElementById("fake-result-text");
 const finalWord = document.getElementById("final-word");
+const qrImage = document.getElementById("qr-image");
+const qrLink = document.getElementById("qr-link");
 
 let gameState = null;
 let timerId = null;
+let deferredInstallPrompt = null;
+
+const appUrl = "https://fakeartist-theta.vercel.app/";
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(appUrl)}`;
 
 function pickRandom(items) {
   return items[Math.floor(Math.random() * items.length)];
+}
+
+function setupQrCode() {
+  qrLink.href = appUrl;
+  qrLink.textContent = appUrl;
+  qrImage.src = qrUrl;
+}
+
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) {
+    return;
+  }
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      // Ignore registration failures and keep the game usable.
+    });
+  });
+}
+
+function setupInstallPrompt() {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installButton.classList.remove("hidden");
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    installButton.classList.add("hidden");
+  });
 }
 
 function showScreen(target) {
@@ -245,3 +283,22 @@ restartButton.addEventListener("click", () => {
   customKeywordInput.value = "";
   showScreen(setupScreen);
 });
+
+installButton.addEventListener("click", async () => {
+  if (!deferredInstallPrompt) {
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  if (outcome !== "accepted") {
+    return;
+  }
+
+  deferredInstallPrompt = null;
+  installButton.classList.add("hidden");
+});
+
+setupQrCode();
+setupInstallPrompt();
+registerServiceWorker();

@@ -1,0 +1,24 @@
+{
+  "name": "가짜예술가 뉴욕에 가다",
+  "short_name": "가짜예술가",
+  "description": "파티게임 가짜예술가 뉴욕에 가다용 주제어 생성기",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7d57c",
+  "theme_color": "#d94b2b",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

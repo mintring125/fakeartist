@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>가짜예술가 뉴욕에 가다 문제생성기</title>
+  <meta name="theme-color" content="#d94b2b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,6 +29,7 @@
       </select>
 
       <button class="primary-button" id="generate-button">문제 생성하기</button>
+      <button class="secondary-button hidden" id="install-button" type="button">홈 화면에 설치</button>
 
       <section class="custom-panel hidden" id="custom-panel" aria-labelledby="custom-title">
         <h2 id="custom-title">직접 주제어 입력</h2>
@@ -37,6 +42,21 @@
       <section class="keyword-panel" aria-labelledby="keyword-title">
         <h2 id="keyword-title">주제어 예시</h2>
         <p>초등학교 3학년 아이들이 재미있게 그릴 수 있는 100개 주제어가 들어 있습니다.</p>
+      </section>
+
+      <section class="qr-panel" aria-labelledby="qr-title">
+        <div>
+          <h2 id="qr-title">바로 접속 QR</h2>
+          <p>태블릿이나 다른 휴대폰에서 바로 열 수 있게 홈 주소 QR을 넣었습니다.</p>
+          <a class="qr-link" id="qr-link" href="https://fakeartist-theta.vercel.app/" target="_blank" rel="noreferrer">https://fakeartist-theta.vercel.app/</a>
+        </div>
+        <img
+          class="qr-image"
+          id="qr-image"
+          alt="가짜예술가 홈 화면 접속 QR 코드"
+          width="220"
+          height="220"
+        >
       </section>
     </section>
 
