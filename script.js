@@ -57,7 +57,8 @@ function showScreen(target) {
 function createGame(keywordOverride = "") {
   const playerCount = Number(playerCountSelect.value);
   const fakeArtist = Math.floor(Math.random() * playerCount);
-  const keyword = keywordOverride || pickRandom(keywords);
+  const customKeyword = typeof keywordOverride === "string" ? keywordOverride.trim() : "";
+  const keyword = customKeyword || pickRandom(keywords);
 
   gameState = {
     playerCount,
